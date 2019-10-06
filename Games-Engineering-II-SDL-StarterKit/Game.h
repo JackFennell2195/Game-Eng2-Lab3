@@ -1,4 +1,3 @@
-//06/10/2019
 #ifndef GAME_H
 #define GAME_H
 #include "Debug.h"
@@ -6,7 +5,6 @@
 
 class Game
 {
-
 public:
 	Game();
 	~Game();
