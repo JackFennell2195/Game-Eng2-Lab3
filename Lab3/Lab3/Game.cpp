@@ -18,7 +18,7 @@ bool Game::Initialize(const char* title, int xpos, int ypos, int width, int heig
 	if(SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
 		DEBUG_MSG("SDL Init success");
-		m_p_Window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
+		//m_p_Window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
 
 		if(m_p_Window != 0)
 		{

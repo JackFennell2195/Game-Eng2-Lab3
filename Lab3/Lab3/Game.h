@@ -26,3 +26,4 @@ private:
 	SDL_Surface* m_p_Surface;
 };
 #endif
+

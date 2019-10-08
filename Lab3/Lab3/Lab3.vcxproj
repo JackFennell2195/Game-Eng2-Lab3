@@ -19,33 +19,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AbstractFactory.h" />
+    <ClInclude Include="Climbing.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GameObjectFactory.h" />
-    <ClInclude Include="GameObjectParameters.h" />
-    <ClInclude Include="Layer.h" />
-    <ClInclude Include="Level.h" />
-    <ClInclude Include="LevelParser.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerFactory.h" />
-    <ClInclude Include="TinyXML2.h" />
-    <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="Idle.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="Jumping.h" />
+    <ClInclude Include="PlayerFSM.h" />
+    <ClInclude Include="State.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Climbing.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GameObjectFactory.cpp" />
-    <ClCompile Include="GameObjectParameters.cpp" />
-    <ClCompile Include="Layer.cpp" />
-    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="Idle.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Jumping.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerFactory.cpp" />
-    <ClCompile Include="TileLayer.cpp" />
-    <ClCompile Include="TinyXML2.cpp" />
-    <ClCompile Include="Vector2D.cpp" />
+    <ClCompile Include="PlayerMachine.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -105,11 +95,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\SDL2-2.0.10\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SDL_SDK)\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\SDL2-2.0.10\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SDL_SDK)\lib\x86</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
