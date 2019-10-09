@@ -1,6 +1,8 @@
 #include "Game.h"
 #include <iostream>
 #include <thread>
+#include <SDL.h>
+#include "Debug.h"
 
 
 using namespace std;
@@ -18,7 +20,7 @@ bool Game::Initialize(const char* title, int xpos, int ypos, int width, int heig
 	if(SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
 		DEBUG_MSG("SDL Init success");
-		//m_p_Window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
+		m_p_Window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
 
 		if(m_p_Window != 0)
 		{
@@ -86,13 +88,16 @@ void Game::Render()
 	DEBUG_MSG("Width Destination" + m_Destination.w);
 
 	if(m_p_Renderer != nullptr && m_p_Texture != nullptr)
-		SDL_RenderCopy(m_p_Renderer, m_p_Texture, NULL, NULL);
+		SDL_RenderCopy(m_p_Renderer, m_p_Texture, &m_currentAnimation, &m_distRect);
 	SDL_RenderPresent(m_p_Renderer);
 }
 
 void Game::Update()
 {
 	//DEBUG_MSG("Updating....");
+	m_ticks = SDL_GetTicks();
+	m_sprite = (m_ticks / 100) % 3;
+	m_distRect = { 260,150, 256, 256 };
 }
 
 void Game::HandleEvents()
@@ -103,31 +108,52 @@ void Game::HandleEvents()
 	{
 		switch(event.type)
 			case SDL_KEYDOWN:
-				switch(event.key.keysym.sym)
+				switch (event.key.keysym.sym)
 				{
 				case SDLK_ESCAPE:
 					m_running = false;
 					break;
 				case SDLK_UP:
-					DEBUG_MSG("Up Key Pressed");
-					SDL_SetRenderDrawColor(m_p_Renderer, 255, 0, 0, 255);
+					DEBUG_MSG("Jumping");
+					m_currentAnimation = { m_sprite * 32, 160, 32, 32 };
 					break;
 				case SDLK_DOWN:
-					DEBUG_MSG("Down Key Pressed");
-					SDL_SetRenderDrawColor(m_p_Renderer, 0, 255, 0, 255);
+					DEBUG_MSG("Climbing");
+					m_currentAnimation = { m_sprite * 32, 96, 32, 32 };
 					break;
 				case SDLK_LEFT:
-					DEBUG_MSG("Left Key Pressed");
-					SDL_SetRenderDrawColor(m_p_Renderer, 0, 0, 255, 255);
+					DEBUG_MSG("Walk Left");
+					m_currentAnimation = { m_sprite * 32, 32, 32, 32 };
 					break;
 				case SDLK_RIGHT:
-					DEBUG_MSG("Right Key Pressed");
-					SDL_SetRenderDrawColor(m_p_Renderer, 255, 255, 255, 255);
+					DEBUG_MSG("Walk Right");
+					m_currentAnimation = { m_sprite * 32, 64, 32, 32 };
 					break;
 				default:
 					SDL_SetRenderDrawColor(m_p_Renderer, 0, 0, 0, 255);
 					break;
 				}
+
+		switch (event.type)
+			case SDL_KEYUP:
+				switch (event.key.keysym.sym)
+				{
+				case SDLK_UP:
+					DEBUG_MSG("Falling");
+					m_currentAnimation = { m_sprite * 32, 128, 32, 32 };
+					break;
+				case SDLK_DOWN:
+					DEBUG_MSG("Falling");
+					m_currentAnimation = { m_sprite * 32, 128, 32, 32 };
+					break;				
+				default:
+					DEBUG_MSG("Idle");
+					m_currentAnimation = { m_sprite * 32, 0, 32, 32 };
+					break;
+
+				}
+
+				
 	}
 }
 

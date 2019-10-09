@@ -2,6 +2,7 @@
 #define GAME_H
 #include "Debug.h"
 #include <SDL.h>
+#include <vector>
 
 class Game
 {
@@ -24,6 +25,20 @@ private:
 	SDL_Rect m_Source;
 	SDL_Rect m_Destination;
 	SDL_Surface* m_p_Surface;
+
+	SDL_Rect m_currentAnimation;
+
+	SDL_Rect m_idleRect;
+	SDL_Rect m_walkLeftRect;
+	SDL_Rect m_walkRightRect;
+	SDL_Rect m_climbRect;
+	SDL_Rect m_fallRect;
+	SDL_Rect m_jumpRect;
+
+	SDL_Rect m_distRect;
+	Uint32 m_ticks;
+	int m_sprite;
+
 };
 #endif
 
